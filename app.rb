@@ -1,28 +1,15 @@
 require 'sinatra'
 require 'dalli'
 require 'rack/cache'
-# require 'padrino-helpers'
-require 'datamapper'
+require 'data_mapper'
 require 'haml'
+require 'sass'
 
 Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each { |file| require file }
 
 use Rack::Deflater
 
-if ENV['RACK_ENV'] == 'development'
-  require 'ruby-debug'
-end
-
-if ENV['RACK_ENV'] == 'production'
-  use Rack::Cache,
-      :verbose => true,
-      :metastore => "memcached://#{ENV['MEMCACHE_SERVERS']}",
-      :entitystore => "memcached://#{ENV['MEMCACHE_SERVERS']}"
-end
-
-
 configure do
-
   set :root, File.dirname(__FILE__)
   set :static, true
   set :public_folder, 'public'
@@ -32,6 +19,7 @@ configure do
   enable :sessions
   set :session_secret, 'super secret session key'
   
+  set :authenticate,  false
   set :auth_username, 'admin'
   set :auth_password, 'secret'
   
@@ -48,6 +36,23 @@ configure do
 end
 
 
+configure :development do |config|
+  require 'ruby-debug'
+  require "sinatra/reloader"
+  config.also_reload "lib/*.rb"
+end
+
+
+configure :production do |config|
+  unless settings.authenticate
+    use Rack::Cache,
+        :verbose => true,
+        :metastore => "memcached://#{ENV['MEMCACHE_SERVERS']}",
+        :entitystore => "memcached://#{ENV['MEMCACHE_SERVERS']}"
+  end
+end
+
+
 # helpers
 helpers Sinatra::Partials
 helpers Sinatra::Helpers
@@ -55,14 +60,22 @@ helpers Sinatra::Helpers
 
 # hooks
 before do
-  # authenticate!
+  if settings.authenticate
+    authenticate!
+  end
+  
+  cache_control :public, :max_age => 60 * 60 * 24
 end
 
 
 # routes
 get '/' do
-  cache_control :public, :max_age => 60 * 60 * 24
   haml :index
+end
+
+
+get '/css/style.css' do
+  scss :"scss/styles"
 end
 
 

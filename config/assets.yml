@@ -1,4 +1,4 @@
-embed_assets: off
+embed_assets: datauri
 gzip_assets: off
 compress_assets: on
 package_path: assets
@@ -11,5 +11,4 @@ javascripts:
 
 stylesheets:
   site:
-    - public/css/defaults.css
-    - public/css/app.css
+    - public/css/styles.css

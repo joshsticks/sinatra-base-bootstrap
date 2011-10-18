@@ -1,6 +1,5 @@
 
 desc 'Compile coffee scripts and pack assets'
 task :brew do
-  `coffee -c -o public/js coffeescript && jammit`
+  `sass views/scss/styles.scss public/css/styles.css && coffee -c -o public/js coffeescript && jammit`
 end
-

@@ -1,0 +1,33 @@
+// Commmon variables
+$grid_columns:  6;
+$grid_width:    960px;
+$grid_margin:   8px;
+$column_width: $grid_width / $grid_columns;
+
+$page_width:    $grid_width + 2 * $grid_margin;
+$page_color:    #EEE;
+$link_color:    #30d6ff;
+$link_hover_color: #ff8314;
+
+@import "mixins";
+@import "defaults";
+
+
+html {
+  background: #EEE;
+  }
+
+body {
+  background-color: #EEE;
+	font-family: "Helvetica", Arial, sans-serif;
+  min-width: $grid_width;
+	-webkit-font-smoothing: antialiased;
+  }
+
+#main {
+  margin-left: auto;
+  margin-right: auto;
+  width: $grid_width;
+  padding: 0 $grid_margin;
+  background-color: $page_color;
+  }

@@ -1,4 +1,2 @@
-class @App
+$(document).ready ->
   
-  constructor: (options) ->
-    @options = options
