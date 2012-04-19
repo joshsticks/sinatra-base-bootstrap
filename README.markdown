@@ -1,11 +1,11 @@
 # Sinatra Base App - Bootstrap
 
-A basic starter project for personal reference, using Twitter Bootstrap. Forked from subblue's subblue/SinatraBaseApp 
+A basic starter project for personal reference, using Twitter Bootstrap. Forked from subblue's [SinatraBaseApp](https://github.com/subblue/SinatraBaseApp)
 
 
 ## Setup
 
-    git clone git@github.com:subblue/SinatraBaseApp.git
+    git clone git@github.com:trejitus/sinatra-base-bootstrap.git
     bundle install
 
 
