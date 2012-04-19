@@ -1,6 +1,6 @@
-# Sinatra Base App
+# Sinatra Base App - Bootstrap
 
-A basic starter project for personal reference.
+A basic starter project for personal reference, using Twitter Bootstrap. Forked from subblue's subblue/SinatraBaseApp 
 
 
 ## Setup
